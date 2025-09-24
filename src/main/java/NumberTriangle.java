@@ -141,7 +141,22 @@ public class NumberTriangle {
             // remove when done; this line is included so running starter code prints the contents of the file
             System.out.println(line);
 
-            // TODO process the line
+            String[] parts = line.trim().split("\\s+");
+            java.util.List<NumberTriangle> curRow = new java.util.ArrayList<>();
+            for (String p : parts) {
+                curRow.add(new NumberTriangle(Integer.parseInt(p)));
+            }
+            if (top == null) {
+                top = curRow.get(0);
+            }
+            if (prevRow != null) {
+                for (int j = 0; j < prevRow.size(); j++) {
+                    prevRow.get(j).setLeft(curRow.get(j));
+                    prevRow.get(j).setRight(curRow.get(j + 1));
+                }
+            }
+            prevRow = curRow;
+
 
             //read the next line
             line = br.readLine();
